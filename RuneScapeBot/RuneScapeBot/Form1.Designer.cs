@@ -31,6 +31,7 @@
             this.btn_launch = new System.Windows.Forms.Button();
             this.opd_selectFile = new System.Windows.Forms.OpenFileDialog();
             this.btn_selectFile = new System.Windows.Forms.Button();
+            this.btn_mouseClick = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_launch
@@ -57,11 +58,22 @@
             this.btn_selectFile.UseVisualStyleBackColor = true;
             this.btn_selectFile.Click += new System.EventHandler(this.btn_selectFile_Click);
             // 
+            // btn_mouseClick
+            // 
+            this.btn_mouseClick.Location = new System.Drawing.Point(598, 140);
+            this.btn_mouseClick.Name = "btn_mouseClick";
+            this.btn_mouseClick.Size = new System.Drawing.Size(135, 23);
+            this.btn_mouseClick.TabIndex = 2;
+            this.btn_mouseClick.Text = "Mouse Click";
+            this.btn_mouseClick.UseVisualStyleBackColor = true;
+            this.btn_mouseClick.Click += new System.EventHandler(this.btn_mouseClick_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_mouseClick);
             this.Controls.Add(this.btn_selectFile);
             this.Controls.Add(this.btn_launch);
             this.Name = "Form1";
@@ -75,6 +87,7 @@
         private System.Windows.Forms.Button btn_launch;
         private System.Windows.Forms.OpenFileDialog opd_selectFile;
         private System.Windows.Forms.Button btn_selectFile;
+        private System.Windows.Forms.Button btn_mouseClick;
     }
 }
 

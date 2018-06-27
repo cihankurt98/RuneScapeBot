@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 
@@ -7,8 +8,10 @@ namespace RuneScapeBot
     public partial class Form1 : Form
     {
         Launcher launcher;
+        Clicker clicker;
         public Form1()
         {
+            clicker = new Clicker();
             InitializeComponent();
             btn_launch.Enabled = false;
         }
@@ -50,6 +53,12 @@ namespace RuneScapeBot
             fileDialog.Filter = "Applications (*.exe)|*.exe";
             fileDialog.ShowDialog();
             return fileDialog.FileName;
+        }
+
+        private void btn_mouseClick_Click(object sender, EventArgs e)
+        {
+            Point point = new Point(500, 500);
+            clicker.ClickOnPoint(launcher.hWnd, point);
         }
     }
 }

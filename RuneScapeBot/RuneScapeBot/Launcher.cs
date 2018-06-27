@@ -4,18 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Threading;
 
 
 namespace RuneScapeBot
 {
     public class Launcher
     {
+        public IntPtr hWnd { get; private set; }
         private Dictionary<int, string> exitMsg = new Dictionary<int, string>();
         private int exitCode;
         private string Path;
         public Launcher(string path)
         {
-           if (string.IsNullOrWhiteSpace(path))
+            if (string.IsNullOrWhiteSpace(path))
             {
                 throw new ArgumentNullException("Path is not right");
             }
@@ -30,25 +32,28 @@ namespace RuneScapeBot
             // Enter the executable to run, including the complete path
             start.FileName = Path;
             // Do you want to show a console window?
-            start.WindowStyle = ProcessWindowStyle.Normal;
+            start.WindowStyle = ProcessWindowStyle.Maximized;
             start.CreateNoWindow = true;
 
 
-            // Run the external process & wait for it to finish
-            using (Process proc = Process.Start(start))
+            new Thread(() =>
             {
+                Thread.CurrentThread.IsBackground = true;
+                // Run the external process & wait for it to finish
+                Process proc = Process.Start(start);
+                hWnd = proc.MainWindowHandle;
                 proc.WaitForExit();
 
                 // Retrieve the app's exit code
                 exitCode = proc.ExitCode;
-            }
-        }
-
-        public string GetExitMessage()
-        {
-            return exitMsg[exitCode];
-        }
-
-      
+            }).Start();
     }
+
+    public string GetExitMessage()
+    {
+        return exitMsg[exitCode];
+    }
+
+
+}
 }
